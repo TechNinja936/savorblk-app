@@ -1,0 +1,93 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#002B1A"/>
+      <stop offset="60%" style="stop-color:#001008"/>
+      <stop offset="100%" style="stop-color:#002B1A"/>
+    </linearGradient>
+    <linearGradient id="vgrd" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#001008;stop-opacity:0"/>
+      <stop offset="100%" style="stop-color:#001008;stop-opacity:0.7"/>
+    </linearGradient>
+    <linearGradient id="goldbar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:0"/>
+      <stop offset="30%" style="stop-color:#FFD700;stop-opacity:1"/>
+      <stop offset="70%" style="stop-color:#FFD700;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#FFD700;stop-opacity:0"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="textglow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  
+  <!-- Decorative elements unique per school -->
+  
+        <line x1="1000" y1="315" x2="1500" y2="315" stroke="#FFD700" stroke-width="1" opacity="0.08"/><line x1="1000" y1="315" x2="1483" y2="444" stroke="#FFD700" stroke-width="1" opacity="0.08"/><line x1="1000" y1="315" x2="1433" y2="565" stroke="#FFD700" stroke-width="1" opacity="0.08"/><line x1="1000" y1="315" x2="1354" y2="669" stroke="#FFD700" stroke-width="1" opacity="0.08"/><line x1="1000" y1="315" x2="1250" y2="748" stroke="#FFD700" stroke-width="1" opacity="0.08"/><line x1="1000" y1="315" x2="1129" y2="798" stroke="#FFD700" stroke-width="1" opacity="0.08"/><line x1="1000" y1="315" x2="1000" y2="815" stroke="#FFD700" stroke-width="1" opacity="0.08"/><line x1="1000" y1="315" x2="871" y2="798" stroke="#FFD700" stroke-width="1" opacity="0.08"/><line x1="1000" y1="315" x2="750" y2="748" stroke="#FFD700" stroke-width="1" opacity="0.08"/><line x1="1000" y1="315" x2="646" y2="669" stroke="#FFD700" stroke-width="1" opacity="0.08"/><line x1="1000" y1="315" x2="567" y2="565" stroke="#FFD700" stroke-width="1" opacity="0.08"/><line x1="1000" y1="315" x2="517" y2="444" stroke="#FFD700" stroke-width="1" opacity="0.08"/><line x1="1000" y1="315" x2="500" y2="315" stroke="#FFD700" stroke-width="1" opacity="0.08"/><line x1="1000" y1="315" x2="517" y2="186" stroke="#FFD700" stroke-width="1" opacity="0.08"/><line x1="1000" y1="315" x2="567" y2="65" stroke="#FFD700" stroke-width="1" opacity="0.08"/><line x1="1000" y1="315" x2="646" y2="-39" stroke="#FFD700" stroke-width="1" opacity="0.08"/><line x1="1000" y1="315" x2="750" y2="-118" stroke="#FFD700" stroke-width="1" opacity="0.08"/><line x1="1000" y1="315" x2="871" y2="-168" stroke="#FFD700" stroke-width="1" opacity="0.08"/><line x1="1000" y1="315" x2="1000" y2="-185" stroke="#FFD700" stroke-width="1" opacity="0.08"/><line x1="1000" y1="315" x2="1129" y2="-168" stroke="#FFD700" stroke-width="1" opacity="0.08"/><line x1="1000" y1="315" x2="1250" y2="-118" stroke="#FFD700" stroke-width="1" opacity="0.08"/><line x1="1000" y1="315" x2="1354" y2="-39" stroke="#FFD700" stroke-width="1" opacity="0.08"/><line x1="1000" y1="315" x2="1433" y2="65" stroke="#FFD700" stroke-width="1" opacity="0.08"/><line x1="1000" y1="315" x2="1483" y2="186" stroke="#FFD700" stroke-width="1" opacity="0.08"/>
+        <circle cx="1000" cy="315" r="60" fill="#FFD700" opacity="0.06"/>
+        <circle cx="1000" cy="315" r="30" fill="#FFD700" opacity="0.08"/>
+        <text x="320" y="490" font-family="Georgia, serif" font-size="280" font-weight="900" 
+              fill="#FFD700" opacity="0.05" text-anchor="middle">NSU</text>
+        
+  
+  <!-- Bottom gradient overlay for text legibility -->
+  <rect x="0" y="320" width="1200" height="310" fill="url(#vgrd)" opacity="0.5"/>
+  
+  <!-- Left accent bar -->
+  <rect x="60" y="200" width="4" height="230" fill="#FFD700" opacity="0.8" rx="2"/>
+  
+  <!-- HOMECOMING wordmark - small top badge -->
+  <rect x="60" y="100" width="220" height="32" rx="4" fill="#FFD700" opacity="0.15"/>
+  <rect x="60" y="100" width="220" height="32" rx="4" fill="none" stroke="#FFD700" stroke-width="1" opacity="0.4"/>
+  <text x="170" y="122" font-family="'Courier New', Courier, monospace" font-size="13" 
+        font-weight="700" letter-spacing="5" fill="#FFD700" opacity="0.9" text-anchor="middle">HOMECOMING</text>
+  
+  <!-- School short name - large ghost text -->
+  
+  <!-- Main school name -->
+  <text x="76" y="290" 
+        font-family="Georgia, 'Times New Roman', serif" 
+        font-size="52" font-weight="700" 
+        fill="#FFFFFF" opacity="0.97" 
+        filter="url(#textglow)"
+        letter-spacing="-0.5">Norfolk State University</text>
+  
+  <!-- Gold divider line -->
+  <rect x="76" y="310" width="500" height="2" fill="url(#goldbar)" opacity="0.7"/>
+  
+  <!-- City + State + Year Founded -->
+  <text x="76" y="350" 
+        font-family="'Courier New', Courier, monospace" 
+        font-size="16" letter-spacing="3" 
+        fill="#FFD700" opacity="0.85">NORFOLK, VA  ·  EST. 1935</text>
+  
+  <!-- HBCU badge -->
+  <rect x="76" y="390" width="94" height="28" rx="3" fill="#FFD700" opacity="0.2"/>
+  <rect x="76" y="390" width="94" height="28" rx="3" fill="none" stroke="#FFD700" stroke-width="1" opacity="0.5"/>
+  <text x="123" y="409" 
+        font-family="'Courier New', Courier, monospace" 
+        font-size="11" font-weight="700" letter-spacing="3" 
+        fill="#FFD700" text-anchor="middle">HBCU</text>
+  
+  <!-- SavorBLK attribution bottom-right -->
+  <text x="1140" y="610" 
+        font-family="'Courier New', Courier, monospace" 
+        font-size="11" letter-spacing="2" 
+        fill="#FFD700" opacity="0.35" text-anchor="end">SAVORBLK</text>
+  
+  <!-- Subtle corner ornament top-right -->
+  <line x1="1140" y1="30" x2="1140" y2="80" stroke="#FFD700" stroke-width="1" opacity="0.3"/>
+  <line x1="1090" y1="30" x2="1140" y2="30" stroke="#FFD700" stroke-width="1" opacity="0.3"/>
+  <line x1="1140" y1="600" x2="1140" y2="550" stroke="#FFD700" stroke-width="1" opacity="0.15"/>
+  <line x1="1090" y1="600" x2="1140" y2="600" stroke="#FFD700" stroke-width="1" opacity="0.15"/>
+  <line x1="60" y1="600" x2="60" y2="550" stroke="#FFD700" stroke-width="1" opacity="0.15"/>
+  <line x1="60" y1="600" x2="110" y2="600" stroke="#FFD700" stroke-width="1" opacity="0.15"/>
+
+</svg>
