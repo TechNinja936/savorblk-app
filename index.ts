@@ -1,123 +1,142 @@
-// Central asset registry — import from here, never use raw require paths in screens
+import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
-export const images = {
-  logo: require('../../assets/images/logo.png'),
-  heroDiscover: require('../../assets/images/hero-discover.jpg'),
-  hbcuHero: require('../../assets/images/hbcu-hero.jpg'),
-  guidesHero: require('../../assets/images/guides-hero.jpg'),
-  profileCardBg: require('../../assets/images/profile-card-bg.jpg'),
-  testKitchenCover: require('../../assets/images/test-kitchen-cover.jpg'),
-  appStoreBadge: require('../../assets/images/app-store-badge.png'),
-  googlePlayBadge: require('../../assets/images/google-play-badge.png'),
+const GEMINI_API_KEY = Deno.env.get('GEMINI_API_KEY')!
+const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!
+const SUPABASE_SERVICE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
+
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
-export const eventImages: Record<string, any> = {
-  'afro-nation-miami': require('../../assets/events/afro-nation-miami.jpg'),
-  'art-basel-miami': require('../../assets/events/art-basel-miami.jpg'),
-  'atlanta-food-wine': require('../../assets/events/atlanta-food-wine.jpg'),
-  'bayou-classic': require('../../assets/events/bayou-classic.jpg'),
-  'black-restaurant-week': require('../../assets/events/black-restaurant-week.jpg'),
-  'broccoli-city': require('../../assets/events/broccoli-city.jpg'),
-  'ciaa-tournament': require('../../assets/events/ciaa-tournament.jpg'),
-  'dc-black-food-wine': require('../../assets/events/dc-black-food-wine.jpg'),
-  'dreamville-festival': require('../../assets/events/dreamville-festival.jpg'),
-  'essence-festival': require('../../assets/events/essence-festival.jpg'),
-  'houston-rodeo': require('../../assets/events/houston-rodeo.jpg'),
-  'juneteenth': require('../../assets/events/juneteenth.jpg'),
-  'labor-day-classic': require('../../assets/events/labor-day-classic.jpg'),
-  'made-in-america': require('../../assets/events/made-in-america.jpg'),
-  'magic-city-classic': require('../../assets/events/magic-city-classic.jpg'),
-  'one-musicfest': require('../../assets/events/one-musicfest.jpg'),
-  'roots-picnic': require('../../assets/events/roots-picnic.jpg'),
-  'roots-picnic-2026': require('../../assets/events/roots-picnic-2026.jpg'),
-  'state-fair-classic': require('../../assets/events/state-fair-classic.jpg'),
-  'sxsw': require('../../assets/events/sxsw.jpg'),
-  'taste-of-soul': require('../../assets/events/taste-of-soul.jpg'),
-  'black-august-cover': require('../../assets/events/black-august-cover.jpg'),
-  'black-heritage-night-cover': require('../../assets/events/black-heritage-night-cover.jpg'),
-  'black-yacht-weekend-chicago': require('../../assets/events/black-yacht-weekend-chicago.jpg'),
-  'labor-day-classic-cover': require('../../assets/events/labor-day-classic-cover.jpg'),
-  'setx-fishing-classic': require('../../assets/events/setx-fishing-classic.jpg'),
-  'state-fair-classic-cover': require('../../assets/events/state-fair-classic-cover.jpg'),
+interface PlaylistRequest {
+  city: string
+  dates?: string
+  hotel?: string
+  vibes: string[]
+  groupSize?: string
+  dietary?: string
+  userId?: string
 }
 
-export const skylineImages: Record<string, any> = {
-  'atlanta': require('../../assets/skylines/atlanta.jpg'),
-  'austin': require('../../assets/skylines/austin.jpg'),
-  'baltimore': require('../../assets/skylines/baltimore.jpg'),
-  'baton-rouge': require('../../assets/skylines/baton-rouge.jpg'),
-  'birmingham': require('../../assets/skylines/birmingham.jpg'),
-  'charlotte': require('../../assets/skylines/charlotte.jpg'),
-  'chicago': require('../../assets/skylines/chicago.jpg'),
-  'dallas': require('../../assets/skylines/dallas.jpg'),
-  'dc': require('../../assets/skylines/washington-dc.jpg'),
-  'washington-dc': require('../../assets/skylines/washington-dc.jpg'),
-  'detroit': require('../../assets/skylines/detroit.jpg'),
-  'houston': require('../../assets/skylines/houston.jpg'),
-  'jackson': require('../../assets/skylines/jackson.jpg'),
-  'los-angeles': require('../../assets/skylines/los-angeles.jpg'),
-  'memphis': require('../../assets/skylines/memphis.jpg'),
-  'miami': require('../../assets/skylines/miami.jpg'),
-  'nashville': require('../../assets/skylines/nashville.jpg'),
-  'new-orleans': require('../../assets/skylines/new-orleans.jpg'),
-  'new-york': require('../../assets/skylines/new-york-city.jpg'),
-  'new-york-city': require('../../assets/skylines/new-york-city.jpg'),
-  'norfolk': require('../../assets/skylines/norfolk.jpg'),
-  'oakland': require('../../assets/skylines/oakland.jpg'),
-  'philadelphia': require('../../assets/skylines/philadelphia.jpg'),
-  'raleigh': require('../../assets/skylines/raleigh.jpg'),
-  'richmond': require('../../assets/skylines/richmond.jpg'),
-  'st-louis': require('../../assets/skylines/st-louis.jpg'),
-  'tampa': require('../../assets/skylines/tampa.jpg'),
-}
+serve(async (req) => {
+  if (req.method === 'OPTIONS') {
+    return new Response('ok', { headers: corsHeaders })
+  }
 
-export const hbcuPhotos: Record<string, any> = {
-  'bethune-cookman': require('../../assets/hbcu/photos/bethune-cookman.jpg'),
-  'bowie-state': require('../../assets/hbcu/photos/bowie-state.jpg'),
-  'clark-atlanta': require('../../assets/hbcu/photos/clark-atlanta.jpg'),
-  'coppin-state': require('../../assets/hbcu/photos/coppin-state.jpg'),
-  'delaware-state': require('../../assets/hbcu/photos/delaware-state.jpg'),
-  'dillard': require('../../assets/hbcu/photos/dillard.jpg'),
-  'fisk': require('../../assets/hbcu/photos/fisk.jpg'),
-  'florida-am': require('../../assets/hbcu/photos/florida-am.jpg'),
-  'hampton': require('../../assets/hbcu/photos/hampton.jpg'),
-  'howard': require('../../assets/hbcu/photos/howard.jpg'),
-  'jackson-state': require('../../assets/hbcu/photos/jackson-state.jpg'),
-  'morehouse': require('../../assets/hbcu/photos/morehouse.jpg'),
-  'morgan-state': require('../../assets/hbcu/photos/morgan-state.jpg'),
-  'nc-at': require('../../assets/hbcu/photos/nc-at.jpg'),
-  'norfolk-state': require('../../assets/hbcu/photos/norfolk-state.jpg'),
-  'spelman': require('../../assets/hbcu/photos/spelman.jpg'),
-  'tennessee-state': require('../../assets/hbcu/photos/tennessee-state.jpg'),
-  'tuskegee': require('../../assets/hbcu/photos/tuskegee.jpg'),
-  'xavier': require('../../assets/hbcu/photos/xavier.jpg'),
-}
+  try {
+    const body: PlaylistRequest = await req.json()
+    const { city, dates, hotel, vibes, groupSize, dietary } = body
 
-export const hbcuCampusBackgrounds = {
-  gameday: require('../../assets/hbcu/covers/campus-gameday.jpg'),
-  historic: require('../../assets/hbcu/covers/campus-historic.jpg'),
-  modern: require('../../assets/hbcu/covers/campus-modern.jpg'),
-  south: require('../../assets/hbcu/covers/campus-south.jpg'),
-  urban: require('../../assets/hbcu/covers/campus-urban.jpg'),
-}
+    // Fetch real businesses from Supabase for context
+    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY)
+    const { data: businesses } = await supabase
+      .from('businesses')
+      .select('id, name, category, neighborhood, price_range, description, tags')
+      .eq('city_slug', city.toLowerCase().replace(/\s+/g, '-'))
+      .eq('is_active', true)
+      .limit(50)
 
-/**
- * Get a skyline image for a city slug, falling back to a default.
- */
-export function getSkyline(citySlug: string): any {
-  return skylineImages[citySlug] ?? skylineImages['atlanta']
-}
+    const businessContext = businesses
+      ? businesses.map((b: any) =>
+          `- ${b.name} (${b.category}, ${b.neighborhood || 'N/A'}, ${'$'.repeat(b.price_range || 2)}) ${b.description ? '– ' + b.description.slice(0, 100) : ''}`
+        ).join('\n')
+      : 'No businesses found for this city yet.'
 
-/**
- * Get an HBCU campus photo by school slug, with generic fallback.
- */
-export function getHBCUPhoto(slug: string): any {
-  return hbcuPhotos[slug] ?? hbcuCampusBackgrounds.south
-}
+    const systemPrompt = `You are the SavorBLK AI Concierge — an expert guide for Black-owned restaurants, bars, cafes, and cultural spots across the US. You create personalized, deeply curated itineraries that feel like advice from a local friend who knows the best of Black culture and cuisine.
 
-/**
- * Get an event image by slug key, with Juneteenth as fallback.
- */
-export function getEventImage(key: string): any {
-  return eventImages[key] ?? eventImages['juneteenth']
-}
+Your itineraries should:
+- Feature ONLY Black-owned establishments
+- Feel premium, personal, and culturally grounded
+- Include specific times and flow naturally as a day/trip
+- Highlight cultural context, not just the food
+- Be honest about price range and vibe
+
+Available spots in ${city}:
+${businessContext}`
+
+    const userPrompt = `Create a SavorBLK vibe route for ${city}${dates ? ` during ${dates}` : ''}.
+Vibes: ${vibes.join(', ')}
+${hotel ? `Staying near: ${hotel}` : ''}
+${groupSize ? `Group size: ${groupSize}` : ''}
+${dietary ? `Dietary notes: ${dietary}` : ''}
+
+Return a JSON itinerary with this structure:
+{
+  "title": "Catchy route title",
+  "tagline": "One-line description",
+  "city": "${city}",
+  "estimated_duration": "e.g. Full Day, Weekend",
+  "stops": [
+    {
+      "time": "e.g. 10:00 AM",
+      "name": "Business name",
+      "category": "e.g. Brunch",
+      "neighborhood": "e.g. Sweet Auburn",
+      "why": "Why this spot fits your vibe (2 sentences)",
+      "must_try": "Specific dish or drink to order",
+      "tip": "Insider tip (optional)"
+    }
+  ],
+  "closing_note": "A 2-3 sentence outro about the experience"
+}`
+
+    const geminiRes = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${GEMINI_API_KEY}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          systemInstruction: { parts: [{ text: systemPrompt }] },
+          contents: [{ role: 'user', parts: [{ text: userPrompt }] }],
+          generationConfig: {
+            temperature: 0.8,
+            maxOutputTokens: 2048,
+            responseMimeType: 'application/json',
+          },
+        }),
+      }
+    )
+
+    if (!geminiRes.ok) {
+      const err = await geminiRes.text()
+      console.error('Gemini error:', err)
+      throw new Error('AI service temporarily unavailable')
+    }
+
+    const geminiData = await geminiRes.json()
+    const raw = geminiData.candidates?.[0]?.content?.parts?.[0]?.text
+
+    if (!raw) throw new Error('No response from AI')
+
+    let itinerary
+    try {
+      itinerary = JSON.parse(raw)
+    } catch {
+      throw new Error('AI returned invalid format')
+    }
+
+    // Optionally save to itineraries table if userId provided
+    if (body.userId && itinerary) {
+      await supabase.from('itineraries').insert({
+        user_id: body.userId,
+        title: itinerary.title,
+        city: city,
+        vibes,
+        stops: itinerary.stops,
+        ai_generated: true,
+      })
+    }
+
+    return new Response(JSON.stringify({ itinerary }), {
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    })
+  } catch (error: any) {
+    console.error('build-playlist error:', error)
+    return new Response(
+      JSON.stringify({ error: error.message || 'Internal server error' }),
+      { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+    )
+  }
+})
